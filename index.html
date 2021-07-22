@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section class="full-section">
+      <div class="container1">
+        <h2>Pizza Center</h2>
+        <div class="info">
+          Full Name: <br />
+          <input type="text" id="name" /><br /><br />
+          Email: <br />
+          <input type="text" id="email" />
+        </div>
+      </div>
+      <div class="container2">
+        <div class="info2">
+          <h3>Customar name: <span id="name2"></span></h3>
+          <h3>Customar Email: <span id="email2"></span></h3>
+        </div>
+      </div>
+
+      <div class="orders">
+        <legend>Orders</legend>
+        veg pizza (rs.90): <br /><br /><input type="text" id="veg" /><br />
+        non-veg pizza (rs.110): <br /><br /><input
+          type="text"
+          id="non-veg"
+        /><br />
+        cheese-veg pizza (rs.130): <br /><br /><input
+          type="text"
+          id="cheese"
+        /><br />
+        corn-pizza (rs.100): <br /><br /><input type="text" id="corn" /><br />
+      </div>
+      <div class="table">
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Menu</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="Billstatement"></tbody>
+        </table>
+        <h1>Total Amount: Rs. <span id="amount"></span></h1>
+      </div>
+    </section>
+    <script>
+      var veg = 90,
+        non_veg = 110,
+        cheese = 130,
+        corn = 100;
+      var veg_q = 0,
+        non_veg_q = 0,
+        cheese_q = 0,
+        corn_q = 0;
+      var vegPriceShow = "",
+        nonVegPriceShow = "",
+        cheesePriceShow = "",
+        cornPriceShow = "";
+      document.getElementById("name").addEventListener("keyup", function () {
+        document.getElementById("name2").innerHTML = this.value;
+      });
+      document.getElementById("email").addEventListener("keyup", function () {
+        document.getElementById("email2").innerHTML = this.value;
+      });
+      document.getElementById("veg").addEventListener("keyup", function () {
+        if (this.value == "" || this.value == 0) {
+          vegPriceShow = "";
+          veg_q = 0;
+          ShowBill();
+        } else {
+          veg_q = this.value;
+          vegPriceShow = `<tr><td>Veg Pizza</td><td>Rs. ${veg} </td><td>${veg_q}</td><td>${veg}x${veg_q} = ${
+            veg * veg_q
+          }</td></tr>`;
+          ShowBill();
+        }
+      });
+      document.getElementById("non-veg").addEventListener("keyup", function () {
+        if (this.value == "" || this.value == 0) {
+          nonVegPriceShow = "";
+          non_veg_q = 0;
+          ShowBill();
+        } else {
+          non_veg_q = this.value;
+          nonVegPriceShow = `<tr><td>Non Veg Pizza</td><td>Rs. ${non_veg} </td><td>${non_veg_q}</td><td>${non_veg}x${non_veg_q} = ${
+            non_veg * non_veg_q
+          }</td></tr>`;
+          ShowBill();
+        }
+      });
+      document.getElementById("cheese").addEventListener("keyup", function () {
+        if (this.value == "" || this.value == 0) {
+          cheesePriceShow = "";
+          cheese_q = 0;
+          ShowBill();
+        } else {
+          cheese_q = this.value;
+          cheesePriceShow = `<tr><td>Cheese Pizza</td><td>Rs. ${cheese} </td><td>${cheese_q}</td><td>${cheese}x${cheese_q} = ${
+            cheese * cheese_q
+          }</td></tr>`;
+          ShowBill();
+        }
+      });
+      document.getElementById("corn").addEventListener("keyup", function () {
+        if (this.value == "" || this.value == 0) {
+          cornPriceShow = "";
+          corn_q = 0;
+          ShowBill();
+        } else {
+          corn_q = this.value;
+          cornPriceShow = `<tr><td>Corn Pizza</td><td>Rs. ${corn} </td><td>${corn_q}</td><td>${corn}x${corn_q} = ${
+            corn * corn_q
+          }</td></tr>`;
+          ShowBill();
+        }
+      });
+      function ShowBill() {
+        document.getElementById("Billstatement").innerHTML =
+          vegPriceShow + nonVegPriceShow + cheesePriceShow + cornPriceShow;
+        document.getElementById("amount").innerHTML =
+          veg * veg_q + non_veg * non_veg_q + cheese * cheese_q + corn * corn_q;
+      }
+    </script>
+  </body>
+</html>
